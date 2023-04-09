@@ -111,15 +111,15 @@ GAME_SPEED = 1000
 MAX_ROUNDS = 5
 let MAX_LEVELS = 3
 let LOESUNG = [
-1,
 0,
 0,
 0,
-1,
+0,
+0,
 0
 ]
 basic.forever(function () {
-    serial.writeString(game_state)
+    serial.writeLine("" + (level))
     if (level == MAX_LEVELS) {
         game_state = "win"
     } else {
@@ -132,6 +132,7 @@ basic.forever(function () {
                     loesche_raetsel()
                     raetsel_nummer = randint(0, 5)
                 } else {
+                    level = 0
                     music.playTone(131, music.beat(BeatFraction.Half))
                     loesche_raetsel()
                     raetsel_nummer = randint(0, 5)
@@ -144,6 +145,7 @@ basic.forever(function () {
                     loesche_raetsel()
                     raetsel_nummer = randint(0, 5)
                 } else {
+                    level = 0
                     music.playTone(131, music.beat(BeatFraction.Half))
                     loesche_raetsel()
                     raetsel_nummer = randint(0, 5)
@@ -164,13 +166,13 @@ control.inBackground(function () {
             music.setTempo(120)
             music.playSoundEffect(music.builtinSoundEffect(soundExpression.sad), SoundExpressionPlayMode.UntilDone)
             game_state = "wait_for_start"
-            basic.pause(5000)
+            basic.pause(2000)
         } else if (game_state == "win") {
             basic.clearScreen()
             basic.showIcon(IconNames.Happy)
             music.setTempo(120)
             music.playSoundEffect(music.builtinSoundEffect(soundExpression.happy), SoundExpressionPlayMode.UntilDone)
-            basic.pause(5000)
+            basic.pause(2000)
         } else {
         	
         }
